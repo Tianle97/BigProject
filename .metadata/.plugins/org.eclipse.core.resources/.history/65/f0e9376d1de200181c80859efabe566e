@@ -1,0 +1,10 @@
+package ie.gmit.sw.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="order_details")
+@Component
+public class Order {
+
+}
