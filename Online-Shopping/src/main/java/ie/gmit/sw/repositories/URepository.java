@@ -1,13 +1,12 @@
 package ie.gmit.sw.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import ie.gmit.sw.model.User;
+import ie.gmit.sw.models.User;
 
 @Repository
-public interface URepository extends JpaRepository<User,Long> {
-	public User findByUsernameAndPassword(String username,String password);
+public interface URepository extends CrudRepository<User,Long> {
 	
 	public User findByUsername(String username);
 	

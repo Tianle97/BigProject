@@ -1,43 +1,30 @@
-package ie.gmit.sw.model;
+package ie.gmit.sw.models;
 
 import java.math.BigDecimal;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.*;
 
-import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="user_detail")
-@Component
+@Table(name="user_details")
 public class User {
-	
 	@Id
 	@GeneratedValue
-	@Column(name="uid")
 	private int uid;
-	
-	@NotNull(message="may not empty")
-	@Column(name="username")
 	private String username;
-	
-	@NotNull(message="may not empty")
-	@Column(name="password")
 	private String password;
-	
-	@Column(name="balance")
 	private BigDecimal balance;
-	
-	@NotNull(message="may not empty")
-	@Column(name="balance")
+	private String phone;
 	private String address;
+	
+	
+	
+	public User() {}
 
-	public int getUid() {
-		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
 	public String getUsername() {
@@ -64,6 +51,14 @@ public class User {
 		this.balance = balance;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -71,5 +66,12 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}	
 }
