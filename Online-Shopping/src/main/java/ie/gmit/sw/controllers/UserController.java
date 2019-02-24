@@ -60,7 +60,6 @@ public class UserController {
 		@GetMapping("/login")
 		public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
 			logger.info("Before Login User: " + username + "  " + password);
-
 			return uService.loginUser(username,password);
 		}
 }

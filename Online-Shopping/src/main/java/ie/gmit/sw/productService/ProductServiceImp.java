@@ -51,5 +51,11 @@ public class ProductServiceImp implements ProductService{
 		return product;
 		
 	}
+	
+	public MongoProduct findByName(MongoProduct mp){
+		
+		
+		return mp;
+	}
 
 }
