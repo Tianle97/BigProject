@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block extraHead %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/login.css") }}" type="text/css"/>
+    <script type="text/javascript" >
+        function selectFile(){
+            var files = document.getElementById('pic').files;
+            console.log(files[0]);
+            if(files.length == 0){
+                return;
+            }
+            var file = files[0];
+            //把上传的图片显示出来
+            //display the picture when user choose a picture for upload
+            var reader = new FileReader();
+            // 将文件以Data URL形式进行读入页面
+            console.log(reader);
+            reader.readAsBinaryString(file);
+            reader.onload = function(f){
+                var result = document.getElementById("img");
+                var src = "data:" + file.type + ";base64," + window.btoa(this.result);
+                result.innerHTML = '<img src ="'+src+'" width="150" height="150" />';
+                // <img id = 'img/>
+                // document.getElementById("img").src = src; 
+            }
+            console.log('file',file);
+        };
+    </script>
+{% endblock %}
+
+{% block mainBody %}
+<div class="loginform">
+        <div class="border">
+            <img width="60" height="60" src="{{url_for("static", filename="images/Group 2.png")}}" />
+            <form id="formRegister" action="/add" method="Post" enctype="multipart/form-data">
+                <p class="text1">Name：</p>
+                <p class="text1">
+                    <input class="text1" name="name" type="text" style="width: 240px; height: 25px;" />
+                </p>
+                <p class="text1">Price: </p>
+                <p class="text1">
+                    <input class="text1" name="price" type="text" style="width: 240px; height: 25px;" />
+                </p>
+                <p class="text1">Type: </p>
+                <p class="text1">
+                    <input class="text1" name="type" type="text" style="width: 240px; height: 25px;" />
+                </p>
+                <p class="text1">Photo: </p>
+                <p class="text1">
+                   <!-- <input class="text1" name="photo" type="text" style="width: 240px; height: 25px;" /> -->
+                   <!-- <input type="file" name="photo" style="display:none;" onchange="filechange(event)"/> -->
+                   <input id="pic" type="file" name="photo" accept = "image/*" onchange = "selectFile()"/>
+                   <div id = "img"></div>
+                </p>
+                <p class="text3">{{get_flashed_messages()[0]}} </p>
+                <p class="text1">
+                        <button onclick="submit" style="margin: 0; padding: 0; border-width: 0;">
+                                <img width="70" height="25"
+                                     src="{{url_for("static", filename="images/registerButton.png")}}" />
+                            </button> 
+                    <a style="font-size:10px; margin-left:15px;" href="/index">back to main pages!</a>
+                </p>
+             </form>
+        </div>
+    </div>
+{% endblock %}
