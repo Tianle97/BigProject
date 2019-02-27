@@ -1,0 +1,100 @@
+#loginform {
+    margin:0 auto;
+    z-index:-1;
+    position: relative;
+    left:100px;
+    top:200px;
+}
+
+.text1 {
+    margin: 6px 0 6px 0;
+    color: #1C6ED1;
+}
+
+.text2 {
+    margin: 6px 0 6px 0;
+    color: #FF8040;
+}
+
+.text3 {
+    margin: 6px 0 6px 0;
+    color: #FF0000;
+}
+
+#username {
+    margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
+.name {
+	padding-top:30px;
+	color:black;
+	padding-left:30px;
+}
+
+#password {
+    margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
+
+#denglu {
+	color: black;
+	height: 30px;
+	width:80px;
+}
+#denglu:hover {
+	color:white;
+}
+#zhuce {
+	color: black;
+	height: 30px;
+	width:80px;
+}
+#zhuce:hover {
+	color:white;
+}
+#balance {
+	margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
+#photo {
+	margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
+#phone {
+	margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
+#address {
+	margin-top: 10px;
+    border-radius: 0.5em;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: auto;    
+    height:26px;
+}
