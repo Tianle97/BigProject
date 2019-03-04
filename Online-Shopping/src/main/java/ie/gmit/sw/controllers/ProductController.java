@@ -1,5 +1,6 @@
 package ie.gmit.sw.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,19 @@ public class ProductController {
 		productService.addProduct(mp);
 		
 		return new Resp("seccess");
+	}
+	
+	@ResponseBody
+	@GetMapping("/show")
+	public ArrayList<MongoProduct> showAll(){
+		
+		ArrayList<MongoProduct> productList = productService.showAll();
+		
+		for (MongoProduct m : productList)
+		{
+			System.out.println(m.getPhoto());
+		}
+		
+		return productList;
 	}
 }
