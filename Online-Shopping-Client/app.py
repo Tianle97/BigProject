@@ -3,8 +3,6 @@ import requests
 import datetime
 import time
 import base64
-import pprint
-
 
 app = Flask(__name__)
 app.secret_key = "123"
@@ -16,19 +14,14 @@ def welcome():
 
 @app.route('/index') 
 def index():
-   # return render_template("index.html")
-    url = 'http://127.0.0.1:8080/index'
+    Parsed_json = getProducts()
+    # print(Parsed_json[0]['name'])
+    return render_template('index.html', items = Parsed_json)
+
+def getProducts():
+    url = 'http://127.0.0.1:8080/show'
     r = requests.get(url)
-    r_json = r.json()
-    
-    #data = r.read().decode("utf-8")
-    pprint.pprint(type(r_json))
-    print(type(r_json))
-    print(type(r))
-    print("aaa",type(r))
-
-
-    return render_template('index.html')
+    return json.loads(r.text)
 
 @app.route('/login')
 def login():
@@ -55,8 +48,8 @@ def login_get():
     elif not password:
         flash("please input password !")
     elif(re == 'successful'):
-        user = username
-        return redirect("/onlineShopping?user=username")
+        user = "index"
+        return redirect("index")
         #return redirect("/onlineShopping?user=username")
     else:
         flash("username/password is wrong!")
@@ -116,7 +109,8 @@ def addProduct():
     t = form.get('type')
     image_file = request.files['photo']
     # imgdata = base64.b64decode(image.split(",")[1])
-    imgdata = str(base64.b64encode(image_file.read()))
+    imgdata_b = str(base64.b64encode(image_file.read()))
+    imgdata = 'data:image/png;base64,'+imgdata_b[2:-1]
     re = ServerAddProduct(name, price, t, imgdata)
     if not name:
         flash("please input name !")
@@ -131,8 +125,10 @@ def addProduct():
         flash("please input photo !")
         return render_template("addProduct.html")
     elif(re == 'seccess'):
-        flash('add Products success!')
-        return render_template("addProduct.html")
+        return redirect('index')
+
+
+
 
 
 if __name__ == '__main__':

@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block extraHead %}
+
+{% endblock %}
+    
 
 {% block mainBody %}
 <div class="bar" style="padding-top: 0px;" >
@@ -12,17 +16,28 @@
                     <input type="text" placeholder="Lowest" class="scope" style="z-index: 1;float:left">
                     <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
                     <input type="text" placeholder="Highest" class="scope">
-                    <input type="button" class="confirm"style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
-                    <input type="button" class="confirm" id="loginbutton" style="background-image: url(static/images/ic_down_pre.png);" value="Login" onclick="window.location.href='/login'">
-                    <input type="button" class="confirm" id="loginbutton" style="background-image: url(static/images/ic_down_pre.png);" value="Register" onclick="window.location.href='/register'">
-                    <input type="button" class="confirm" id="loginbutton" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Login" onclick="window.location.href='/login'">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Register" onclick="window.location.href='/register'">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
                 </ul>
         </div>
 </div>
-<div id="showGoods">
-        <ul>
-                {% for item in options %}
-                        <li>item['name'] </li>
+<div id="productList">
+        <ul style="list-style: none;">
+                {% for item in items %}
+                <li id="itemLi">
+                        <p>
+                                <img width="200" height="200" src={{item['photo']}}>
+                                <br/>
+                                &#165;{{item['price']}}
+                                <br/>
+                                {{ item['name'] }}
+                                <br/>
+                                {{ item['type'] }} 
+                        </p>
+                        
+                </li>
                 {% endfor %}
         </ul>
 </div>
