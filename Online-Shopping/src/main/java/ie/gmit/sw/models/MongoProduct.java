@@ -21,6 +21,7 @@ public class MongoProduct implements Serializable{
 	private String type;
 	private String photo;
 	
+	
 	public MongoProduct(){
 		
 	}
