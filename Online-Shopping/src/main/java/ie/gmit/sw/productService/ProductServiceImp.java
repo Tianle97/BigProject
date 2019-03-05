@@ -16,6 +16,7 @@ public class ProductServiceImp implements ProductService{
 	@Autowired
 	private MonRepository monRepository;
 	
+	// add the Logger for check the problem if have a error when project is running
 	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImp.class);
 	
 	@Override
@@ -28,6 +29,7 @@ public class ProductServiceImp implements ProductService{
 		return "success to save";
 	}
 
+	//for search product according to name
 	@Override
 	public ArrayList<MongoProduct> getProduct() {
 		ArrayList<MongoProduct> product = null;
