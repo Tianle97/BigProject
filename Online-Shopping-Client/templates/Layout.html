@@ -5,8 +5,7 @@
         {% block head %}
 
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <title>Let Go!乐购</title>
-
+            <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
             <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}" type="text/css"/>
 
         {% endblock %}
@@ -19,14 +18,14 @@
             <header id="header">
                 {% block header %}
                 <div style="float:none;width:300px;height:100px">
-                    <img src="{{url_for("static", filename="images/banner_pre.png")}}" style="display:center; width:50px;height:50px"/>
-                    <span style="color:black;font-size:40px;font-family:sansserif;">Let Go!乐购</span>
+                    <img src="{{url_for("static", filename="images/banner_pre.png")}}" style="display:center; width:50px;height:50px" onclick="window.location.href='/index'"/>
+                    <span style="color:black;font-size:40px;font-family:sansserif;">Let Buy!</span>
                 </div>
                 <div id="icon">
-                        <img src="{{url_for("static", filename="images/ic_shopbag.png")}}"/>
-                        <span>ShoppingBag</span>
-                        <img src="{{url_for("static", filename="images/Group 2.png")}}"/>
-                        <span>User</span>
+                        <img src="{{url_for("static", filename="images/ic_shopbag.png")}}" onclick="window.location.href='/buy'"/>
+                        <span id="ShoppingBag" >ShoppingBag</span>
+                        <img src="{{url_for("static", filename="images/Group 2.png")}}" onclick="window.location.href='/login'"/>
+                        <span id = "user">User</span>
                         <img src="{{url_for("static", filename="images/ic_logout.png")}}"/>
                 </div>
                 <div class="clr">
@@ -36,9 +35,8 @@
 
             <div class="feature">
                 {% block feature %}
-                    <div class="feature-inner">
-                        <h1>Let Go!乐购</h1>
-                    </div>
+                    
+                        <h2 style="color:white">AAA</h2>
                 {% endblock %}
             </div>
 
@@ -46,26 +44,13 @@
                 {% block mainBody %}
                     
                 {% endblock %}
+                <p> </p>
             </div>
 
-            <div id="footerblurb">
-                {% block footerblurb %}
-                    
-                {% endblock %}
-                <div class="clr">
-
-                </div>
-            </div>
             <footer id="footer">
                 {% block footer %}
-                    <div id="footer-inner">
-                        <p><a href="#">Your ShoppingBag</a> &#124; <a href="#">Help</a> &#124; <a href="#">Contact</a></p>
-                        <div class="clr"></div>
-                    </div>
+                    <p><a href="#">Your ShoppingBag</a> &#124; <a href="#">Help</a> &#124; <a href="#">Contact</a></p>
                 {% endblock %}
-                <div class="clr">
-
-                </div>
             </footer>
         </div>
     </body>

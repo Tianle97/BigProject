@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block mainBody %}
-    <div class="loginform">
-        <div class="border">
+    <div>
+        <div>
             <img width="60" height="60" src="{{url_for("static", filename="images/Group 2.png")}}" />
-            <form id="formRegister" action="/user" method="post">
+            <form id="formRegister" style="text-align:center;" action="/user" method="post">
+                
                 <p class="text1">user name：</p>
                 <p class="text1">
                     <input class="text1" name="username" type="text" style="width: 240px; height: 25px;" />

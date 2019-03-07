@@ -32,6 +32,7 @@
         <div class="border">
             <img width="60" height="60" src="{{url_for("static", filename="images/Group 2.png")}}" />
             <form id="formRegister" action="/add" method="Post" enctype="multipart/form-data">
+            
                 <p class="text1">Name：</p>
                 <p class="text1">
                     <input class="text1" name="name" type="text" style="width: 240px; height: 25px;" />
@@ -40,9 +41,13 @@
                 <p class="text1">
                     <input class="text1" name="price" type="text" style="width: 240px; height: 25px;" />
                 </p>
-                <p class="text1">Type: </p>
+                <p class="text1">Style: </p>
                 <p class="text1">
                     <input class="text1" name="type" type="text" style="width: 240px; height: 25px;" />
+                </p>
+                <p class="text1">Stocks: </p>
+                <p class="text1">
+                    <input class="text1" name="stocks" type="text" style="width: 240px; height: 25px;" />
                 </p>
                 <p class="text1">Photo: </p>
                 <p class="text1">

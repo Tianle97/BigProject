@@ -6,14 +6,14 @@
 
 {% block mainBody %}
     <div class="loginForm">
-        <div class="border">
+        
             <img width="60" height="60" src="{{url_for("static", filename="images/Group 2.png")}}" />
             <form id="formRegister" action="/login" method="post">
-                <p class="text1">user name：</p>
+                <p class="text1">User name：</p>
                 <p class="text1">
                     <input class="text1" name="username" type="text" style="width: 240px; height: 25px;" />
                 </p>
-                <p class="text1">password：</p>
+                <p class="text1">Password：</p>
                 <p class="text1">
                     <input class="text1" name="password" type="password" style="width: 240px; height: 25px;" />
                 </p>
@@ -27,7 +27,7 @@
                     <a style="font-size:10px; margin-left:15px;" href="/register">Create a New account !</a>
                 </p>
              </form>
-        </div>
+        
     </div>
 
 

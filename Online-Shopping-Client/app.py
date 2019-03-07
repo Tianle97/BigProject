@@ -48,9 +48,8 @@ def login_get():
     elif not password:
         flash("please input password !")
     elif(re == 'successful'):
-        user = "index"
-        return redirect("index")
-        #return redirect("/onlineShopping?user=username")
+        user = username
+        return redirect("/onlineShopping?user=username")
     else:
         flash("username/password is wrong!")
     return render_template("index.html")
@@ -89,13 +88,12 @@ def register():
         flash('register success!')
         return render_template("login.html")
 
-
 @app.route('/addProduct')
 def addProduct_init():
     return render_template("addProduct.html")
 
-def ServerAddProduct(name, price, t, ph):
-    data = {'name': name, 'price': price,'type':t,'photo':ph}
+def ServerAddProduct(name, price, t, ph, st):
+    data = {'name': name, 'price': price,'type':t,'photo':ph, 'stocks':st}
     url = 'http://127.0.0.1:8080/addProduct'
     r = requests.post(url, json = data)
     Parsed_json = json.loads(r.text)
@@ -107,11 +105,12 @@ def addProduct():
     name = form.get('name')
     price = form.get('price')
     t = form.get('type')
+    st = form.get('stocks')
     image_file = request.files['photo']
     # imgdata = base64.b64decode(image.split(",")[1])
     imgdata_b = str(base64.b64encode(image_file.read()))
     imgdata = 'data:image/png;base64,'+imgdata_b[2:-1]
-    re = ServerAddProduct(name, price, t, imgdata)
+    re = ServerAddProduct(name, price, t,imgdata,st)
     if not name:
         flash("please input name !")
         return render_template("addProduct.html")
@@ -121,6 +120,9 @@ def addProduct():
     elif not t:
         flash("please input type !")
         return render_template("addProduct.html")
+    elif not st:
+        flash("please input stocks !")
+        return render_template("addProduct.html")
     elif not image_file:
         flash("please input photo !")
         return render_template("addProduct.html")
@@ -128,6 +130,20 @@ def addProduct():
         return redirect('index')
 
 
+@app.route('/buy',methods = ['POST']) 
+def buyProduct():
+    Parsed_json = buy()
+    # print(Parsed_json[0]['name'])
+    return render_template('buy.html', items = Parsed_json)
+
+def buy():
+    # read json + reply
+    id = request.json()
+    print(id)
+    url = 'http://127.0.0.1:8080/buy'
+    r = requests.post(url,json = id)
+    #return json.loads(r.text)
+    return r
 
 
 
