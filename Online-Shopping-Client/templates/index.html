@@ -3,21 +3,18 @@
 {% block extraHead %}
         <script type="text/javascript">
             function getId(el){
-                var data = el.id;
-                dataJson = {'id':data}
-                alert(dataJson.id);
-                console.log(dataJson);
+                var id = el.id;
+                // dataJson = {'id':data}
+                // alert(dataJson.id);
+                console.log(id);
                 $.ajax({
-                        url: 'https://127.0.0.1:8080/buy',//自己的服务接口地址
-                        method: 'POST',
-                        //data:JSON.stringify({id: el.id}),
-                        data:dataJson,
-                        dataType: 'json',
+                        url: '/buyProduct?id='+id,//自己的服务接口地址
+                        type: 'POST',
                         success: function (data) {
                                 console.log(data);
                         },
                         error:function() {
-           	 	alert("error");
+           	 	        alert("error");
                         },
                         
                 });

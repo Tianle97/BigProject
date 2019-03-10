@@ -130,20 +130,22 @@ def addProduct():
         return redirect('index')
 
 
-@app.route('/buy',methods = ['POST']) 
+@app.route('/buyProduct',methods = ['POST']) 
 def buyProduct():
-    Parsed_json = buy()
-    # print(Parsed_json[0]['name'])
+    id = request.args.get('id')
+    print(id)
+    Parsed_json = buy(id)
+    print('----->',Parsed_json['name'])
     return render_template('buy.html', items = Parsed_json)
 
-def buy():
-    # read json + reply
-    id = request.json()
-    print(id)
-    url = 'http://127.0.0.1:8080/buy'
-    r = requests.post(url,json = id)
-    #return json.loads(r.text)
-    return r
+# @app.route('/buyProduct')
+# def buyProductPage():
+#     return render_template('buy.html', items = Parsed_json)
+
+def buy(id):
+    url = 'http://127.0.0.1:8080/buy?id='+id
+    r = requests.get(url)
+    return json.loads(r.text)
 
 
 

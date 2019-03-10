@@ -24,37 +24,22 @@
         </div>
 </div>
 <div id="productList">
-        <ul style="list-style: none;">
-                {% for item in items %}
-                <li id="itemLi">
-                    <p>
-                            <img width="200" height="200" src={{item['photo']}}>
-                            <br/>
-                            &#165;{{item['price']}}
-                            <br/>
-                            {{ item['name'] }}
-                            <br/>
-                            {{ item['type'] }} 
-                            <br/>
-                            <p class="text1">Amount: </p>
-                            <p class="text1">
-                                <input class="text1" name="amount" type="text" style="width: 240px; height: 25px;" />
-                            </p>
-                    </p>
-
-                    <p class="text1">
-                            <button onclick="submit" style="margin: 0; padding: 0; border-width: 0;">
-                                <img width="70" height="25"
-                                     src="{{url_for("static", filename="images/registerButton.png")}}" />
-                            </button>
-                            <a style="font-size:10px; margin-left:15px;" href="/index">back to index !</a>
-                    </p>
-                        
-                </li>
-                {% endfor %}
-                
-        </ul>
-        
-</div>
+                <ul style="list-style: none;">
+                        {% for item in items %}
+                        <li id="itemLi">
+                                <p>
+                                        <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                        <br/>
+                                        <span style="color:red;font-size:1.1em;">&#165;{{item['price']}}</span>
+                                        <br/>
+                                        {{ item['name'] }}
+                                        <br/>
+                                        {{ item['type'] }} 
+                                </p>
+                                
+                        </li>
+                        {% endfor %}
+                </ul>
+        </div>
 {% endblock %}
 
