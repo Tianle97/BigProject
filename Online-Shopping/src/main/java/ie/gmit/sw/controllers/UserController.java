@@ -23,29 +23,6 @@ public class UserController {
 	// Server console logger
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	
-//	@RequestMapping(value = "/login" , method = RequestMethod.GET)
-//	public String login() {
-//		return "login";
-//	}
-	
-	//Login POST
-//		@RequestMapping(value="/login" , method = RequestMethod.POST)
-//		@ResponseBody
-//		public User loginPost(User user,BindingResult result,HttpServletRequest h,Model m, HttpSession session){
-//			System.out.println("aaa"+h);
-//			String username = h.getParameter("username");
-//			String password = h.getParameter("password");
-//			User users = uService.findUnameAndPwd(username, password);
-//			return users;
-//		}
-		
-//		//Register
-//		@RequestMapping(value="/register",method = RequestMethod.GET)
-//		public String register(){
-//			System.out.println("Register");
-//			return "register";
-//		}
 		
 		@PostMapping("/register")
 		public Resp registerPost(@RequestBody User user) {
