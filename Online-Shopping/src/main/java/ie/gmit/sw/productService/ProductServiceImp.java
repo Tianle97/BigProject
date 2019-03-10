@@ -1,5 +1,6 @@
 package ie.gmit.sw.productService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -53,11 +54,16 @@ public class ProductServiceImp implements ProductService{
 		return product;
 		
 	}
-	
-	public MongoProduct findByName(MongoProduct mp){
+
+	public MongoProduct findById(String id) {
 		
-		
+		MongoProduct mp = null;
+		mp = monRepository.findById(id);
 		return mp;
+	}
+	
+	public String buyProduct(BigDecimal price){
+		return null;
 	}
 
 }

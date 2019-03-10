@@ -11,5 +11,6 @@ import ie.gmit.sw.models.MongoProduct;
 public interface MonRepository extends MongoRepository<MongoProduct, Long> {
 	
 	public ArrayList<MongoProduct> findByName(String name);
+	public MongoProduct findById(String id);
 
 }
