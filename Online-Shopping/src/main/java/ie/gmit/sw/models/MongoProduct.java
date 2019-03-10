@@ -5,41 +5,42 @@ import java.math.BigDecimal;
 
 import javax.persistence.*;
 
-import org.bson.types.ObjectId;
 
 
 public class MongoProduct implements Serializable{
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8254263003154089546L;
-
+	private static final long serialVersionUID = 1L;
 	@Id
-	private ObjectId id;
+	private String id;
 	private String name;
 	private BigDecimal price;
 	private String type;
 	private String photo;
+	private int stocks;
 	
 	
 	public MongoProduct(){
 		
 	}
 	
-	public MongoProduct(ObjectId id, String name, BigDecimal price, String type, String photo) {
+	public MongoProduct(String id, String name, BigDecimal price, String type, String photo, int stocks) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.type = type;
 		this.photo = photo;
+		this.stocks = stocks;
 	}
 
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -74,4 +75,13 @@ public class MongoProduct implements Serializable{
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
+	public int getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(int stocks) {
+		this.stocks = stocks;
+	}
+	
 }

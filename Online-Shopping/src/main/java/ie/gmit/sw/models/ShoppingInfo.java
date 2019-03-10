@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 
 import javax.persistence.*;
 
-import org.springframework.stereotype.Component;
-
 public class ShoppingInfo implements Serializable {
 	/**
 	 * 
