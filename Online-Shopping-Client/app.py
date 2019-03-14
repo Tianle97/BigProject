@@ -15,8 +15,8 @@ def welcome():
 @app.route('/index') 
 def index():
     Parsed_json = getProducts()
-    # print(Parsed_json[0]['name'])
-    return render_template('index.html', items = Parsed_json)
+    print(Parsed_json[0]['name'])
+    return render_template('index.html', products = Parsed_json,)
 
 def getProducts():
     url = 'http://127.0.0.1:8080/show'
@@ -34,9 +34,10 @@ def ServerLogin(user,psd):
     }
     url = 'http://127.0.0.1:8080/login'
     r = requests.get(url, params).text
+    print("222",r)
     return r
 
-@app.route('/login/<user>',methods=['POST'])
+@app.route('/login',methods=['POST'])
 def login_get():
     global user
     form = request.form
@@ -49,10 +50,16 @@ def login_get():
         flash("please input password !")
     elif(re == 'successful'):
         user = username
-        return redirect("/onlineShopping?user=username")
+        return redirect("logined")
     else:
         flash("username/password is wrong!")
-    return render_template("index.html")
+    return render_template("login.html")
+
+@app.route('/logined')
+def longined():
+    global user
+    Parsed_json = getProducts()
+    return render_template("logined.html",username=user,items = Parsed_json)
 
 @app.route('/register')
 def register_init():
@@ -88,10 +95,12 @@ def register():
         flash('register success!')
         return render_template("login.html")
 
+# For user add product to the index page
 @app.route('/addProduct')
 def addProduct_init():
     return render_template("addProduct.html")
 
+# 
 def ServerAddProduct(name, price, t, ph, st):
     data = {'name': name, 'price': price,'type':t,'photo':ph, 'stocks':st}
     url = 'http://127.0.0.1:8080/addProduct'
@@ -129,25 +138,31 @@ def addProduct():
     elif(re == 'seccess'):
         return redirect('index')
 
-
+# this route for user buy products 
+# use global value for easy get id in this function
 @app.route('/buyProduct',methods = ['POST']) 
 def buyProduct():
+    global id
     id = request.args.get('id')
     print(id)
     Parsed_json = buy(id)
     print('----->',Parsed_json['name'])
-    return render_template('buy.html', items = Parsed_json)
+    return redirect("buy")
+    #return render_template('buy.html', items = Parsed_json)
 
-# @app.route('/buyProduct')
-# def buyProductPage():
-#     return render_template('buy.html', items = Parsed_json)
-
+# A function send url to back-end for get product information from Mongodb
 def buy(id):
     url = 'http://127.0.0.1:8080/buy?id='+id
     r = requests.get(url)
     return json.loads(r.text)
 
-
+@app.route('/buy') 
+def getProduct():
+    global id
+    Parsed_json = buy(id)
+    print("buy",id)
+    #print(Parsed_json)
+    return render_template("buy.html",item = Parsed_json)
 
 if __name__ == '__main__':
     app.debug = True
