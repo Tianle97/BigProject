@@ -25,7 +25,7 @@
 </div>
 <div id="productList">
                 <ul style="list-style: none;">
-                        {% for item in items %}
+                        
                         <li id="itemLi">
                                 <p>
                                         <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
@@ -38,7 +38,7 @@
                                 </p>
                                 
                         </li>
-                        {% endfor %}
+                        
                 </ul>
         </div>
 {% endblock %}

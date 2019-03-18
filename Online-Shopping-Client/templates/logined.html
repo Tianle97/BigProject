@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block extraHead %}
+        <script type="text/javascript">
+            function getId(el){
+                var id = el.id;
+                // dataJson = {'id':data}
+                // alert(dataJson.id);
+                console.log(id);
+                $.ajax({
+                        url: '/buyProduct?id='+id,//自己的服务接口地址
+                        type: 'POST',
+                        success: function (id) {
+                                console.log(id);
+                        },
+                        error:function() {
+           	 	        alert("error");
+                        },
+                        
+                });
+             }
+        </script>
+
+{% endblock %}
+    
+
+{% block mainBody %}
+<div class="bar" style="padding-top: 0px;" >
+        <div class="nav" >
+                <ul class="pc-nav" style="background-image:url(static/images/ic_down_nor.png);">
+                    <li><a href="/guys">Guys</a></li>
+                    <li><a href="/girls">Girls</a></li>
+                    <li><a href="/jeans">Jeans</a></li>
+                    <li><a href="/sale">Sales</a></li>
+                    <input type="text" placeholder="Lowest" class="scope" style="z-index: 1;float:left">
+                    <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
+                    <input type="text" placeholder="Highest" class="scope">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
+                    <input type="buntton" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}>
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
+                </ul>
+        </div>
+</div>
+<div id="productList">
+        <ul style="list-style: none;">
+                {% for item in items %}
+                <li id="itemLi">
+                        <p>
+                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                <br/>
+                                <span style="color:red;font-size:1.1em;">&#165;{{item['price']}}</span>
+                                <br/>
+                                {{ item['name'] }}
+                                <br/>
+                                {{ item['type'] }} 
+                        </p>
+                        
+                </li>
+                {% endfor %}
+        </ul>
+</div>
+{% endblock %}
+
+

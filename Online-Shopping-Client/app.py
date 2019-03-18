@@ -147,7 +147,7 @@ def buyProduct():
     print(id)
     Parsed_json = buy(id)
     print('----->',Parsed_json['name'])
-    return redirect("buy")
+    return id
     #return render_template('buy.html', items = Parsed_json)
 
 # A function send url to back-end for get product information from Mongodb
