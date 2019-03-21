@@ -1,0 +1,29 @@
+.text1 {
+    font-size: 18px;
+    margin: 6px 0 6px 0;
+    color: #1C6ED1;
+}
+.text3 {
+    margin: 6px 0 6px 0;
+    color: #FF0000;
+}
+
+select{
+    margin:100px;
+    background: rgba(0,0,0,0);
+    font-size: 18px;
+    color: white;
+    text-align: center;
+}
+option{
+    color: #1C6ED1;
+    background: rgb(223, 226, 226);
+    line-height: 20px;
+}
+select:focus{
+    border: 2px #ddd solid;
+    box-shadow: 0 0 15px 1px #DDDDDD;
+}
+option:hover{
+    background: #EBCCD1;
+}
