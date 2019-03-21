@@ -17,20 +17,21 @@
                     <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
                     <input type="text" placeholder="Highest" class="scope">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
-                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Login" onclick="window.location.href='/login'">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}  onclick="">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Register" onclick="window.location.href='/register'">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
                 </ul>
         </div>
 </div>
 <div id="productList">
+        <form action="/getProduct" method="Post" enctype="multipart/form-data"> 
                 <ul style="list-style: none;">
                         
                         <li id="itemLi">
                                 <p>
                                         <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
                                         <br/>
-                                        <span style="color:red;font-size:1.1em;">&#165;{{item['price']}}</span>
+                                        <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                         <br/>
                                         {{ item['name'] }}
                                         <br/>
@@ -38,8 +39,21 @@
                                 </p>
                                 
                         </li>
-                        
                 </ul>
-        </div>
+        
+                <p class="text1">Amount: </p>
+                <p class="text1">
+                        <input class="text1" name="amount" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
+                </p>
+                <p class="text3">{{get_flashed_messages()[0]}} </p>
+                <p class="text1">
+                    <button onclick="submit" style="margin: 0; padding: 0; border-width: 0;">
+                        <img width="70" height="25"
+                             src="{{url_for("static", filename="images/registerButton.png")}}" />
+                    </button>
+                    <a style="font-size:10px; margin-left:15px;" href="/index">back to All Products !</a>
+                </p>
+        </form>
+</div>
 {% endblock %}
 

@@ -11,7 +11,7 @@
                         url: '/buyProduct?id='+id,//自己的服务接口地址
                         type: 'POST',
                         success: function (id) {
-                                console.log(id);
+                                redirect();
                         },
                         error:function() {
            	 	        alert("error");
@@ -19,6 +19,10 @@
                         
                 });
              }
+
+        function redirect() {
+                window.location.href = "http://127.0.0.1:5000/buyPage";
+        }
         </script>
 
 {% endblock %}
@@ -36,7 +40,7 @@
                     <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
                     <input type="text" placeholder="Highest" class="scope">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
-                    <input type="buntton" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}>
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}  onclick="">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
                 </ul>
         </div>
@@ -48,11 +52,13 @@
                         <p>
                                 <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
                                 <br/>
-                                <span style="color:red;font-size:1.1em;">&#165;{{item['price']}}</span>
+                                <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                 <br/>
                                 {{ item['name'] }}
                                 <br/>
                                 {{ item['type'] }} 
+                                <br/>
+                                {{ item['style'] }} 
                         </p>
                         
                 </li>

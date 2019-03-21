@@ -34,12 +34,11 @@ def ServerLogin(user,psd):
     }
     url = 'http://127.0.0.1:8080/login'
     r = requests.get(url, params).text
-    print("222",r)
     return r
 
 @app.route('/login',methods=['POST'])
 def login_get():
-    global user
+    #global user
     form = request.form
     username = form.get('username')
     password = form.get('password')
@@ -49,7 +48,7 @@ def login_get():
     elif not password:
         flash("please input password !")
     elif(re == 'successful'):
-        user = username
+        session['username'] = username
         return redirect("logined")
     else:
         flash("username/password is wrong!")
@@ -57,9 +56,9 @@ def login_get():
 
 @app.route('/logined')
 def longined():
-    global user
     Parsed_json = getProducts()
-    return render_template("logined.html",username=user,items = Parsed_json)
+    print("username: ",session['username'])
+    return render_template("logined.html",username=session['username'],items = Parsed_json)
 
 @app.route('/register')
 def register_init():
@@ -147,6 +146,7 @@ def buyProduct():
     print(id)
     Parsed_json = buy(id)
     print('----->',Parsed_json['name'])
+    #print("username: ",user)
     return id
     #return render_template('buy.html', items = Parsed_json)
 
@@ -156,13 +156,20 @@ def buy(id):
     r = requests.get(url)
     return json.loads(r.text)
 
-@app.route('/buy') 
+@app.route('/buyPage') 
 def getProduct():
     global id
     Parsed_json = buy(id)
     print("buy",id)
+    print("username:  ",session['username'])
     #print(Parsed_json)
-    return render_template("buy.html",item = Parsed_json)
+    return render_template("buy.html", username = session['username'], item = Parsed_json)
+
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('username', None)
+   return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.debug = True

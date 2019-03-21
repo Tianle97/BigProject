@@ -11,20 +11,29 @@
                         url: '/buyProduct?id=' + id,//自己的服务接口地址
                         type: 'POST',
                         success: function (data) {
-                                console.log(data);
-                                redirect();
+                                if($('#login').val('Login'))
+                                {
+                                        redirectLogin();
+                                }
+                                else{
+                                        redirect();
+                                }
+                                
                                 // location.replace("localhost:5000/buy");
 
                         },
                         error: function () {
-                                alert("error");
+                                redirectLogin();
                         },
 
                 });
         }
 
         function redirect() {
-                window.location.href = "http://127.0.0.1:5000/buy";
+                window.location.href = "http://127.0.0.1:5000/buyPage";
+        }
+        function redirectLogin() {
+                window.location.href = "http://127.0.0.1:5000/login";
         }
 
 </script>
@@ -45,8 +54,7 @@
                         <input type="text" placeholder="Highest" class="scope">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
                                 value="Confirm" id="queren">
-                        <input type="buntton" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
-                                value="Login" onclick="window.location.href='/login'">
+                                <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value='Login' onclick="window.location.href='/login'">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
                                 value="Register" onclick="window.location.href='/register'">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
@@ -61,7 +69,7 @@
                         <p>
                                 <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
                                 <br />
-                                <span style="color:red;font-size:1.1em;">&#165;{{item['price']}}</span>
+                                <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                 <br />
                                 {{ item['name'] }}
                                 <br />

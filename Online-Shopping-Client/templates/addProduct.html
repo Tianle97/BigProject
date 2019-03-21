@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block extraHead %}
-    <link rel="stylesheet" href="{{ url_for("static", filename="css/login.css") }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/addProduct.css") }}" type="text/css"/>
     <script type="text/javascript" >
         function selectFile(){
             var files = document.getElementById('pic').files;
@@ -35,25 +35,32 @@
             
                 <p class="text1">Name：</p>
                 <p class="text1">
-                    <input class="text1" name="name" type="text" style="width: 240px; height: 25px;" />
+                    <input class="text1" name="name" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
                 </p>
                 <p class="text1">Price: </p>
                 <p class="text1">
-                    <input class="text1" name="price" type="text" style="width: 240px; height: 25px;" />
+                    <input class="text1" name="price" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
                 </p>
                 <p class="text1">Style: </p>
                 <p class="text1">
-                    <input class="text1" name="type" type="text" style="width: 240px; height: 25px;" />
+                   <!--
+                      autocomplete="off" 设置为off，代表浏览器将不记忆用户在该文本框本次的输入，也不进行建议提醒
+                    -->
+                    <select class="text1" name="type" style="width: 240px; height: 33px;" autocomplete="off">                   
+                        <option value="Girls">Girls</option>
+                        <option value="Guys">Guys</option>
+                        <option value="Kids">Kids</option>
+                    </select>
                 </p>
                 <p class="text1">Stocks: </p>
                 <p class="text1">
-                    <input class="text1" name="stocks" type="text" style="width: 240px; height: 25px;" />
+                    <input class="text1" name="stocks" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
                 </p>
                 <p class="text1">Photo: </p>
                 <p class="text1">
                    <!-- <input class="text1" name="photo" type="text" style="width: 240px; height: 25px;" /> -->
                    <!-- <input type="file" name="photo" style="display:none;" onchange="filechange(event)"/> -->
-                   <input id="pic" type="file" name="photo" accept = "image/*" onchange = "selectFile()"/>
+                   <input id="pic" type="file" name="photo" accept = "image/*" onchange = "selectFile()" />
                    <div id = "img"></div>
                 </p>
                 <p class="text3">{{get_flashed_messages()[0]}} </p>
