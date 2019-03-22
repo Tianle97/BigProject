@@ -34,7 +34,7 @@ public class UService {
     	// Check if user exist in DB. Delegate this task to SqlDAO repository.
     	// Hibernate provides a method findBy___(param) to perform querying.
     	// If you want, you can easily switch to MongoDB
-        if (userRepository.findByUsername(username) == null /*&& mongoDB.findByUsername(username) == null*/) {
+        if (userRepository.findByUsername(username) == null) {
         	logger.info("+++++++ Wrong Username! ++++++");
             return "no_user";
         } else {
@@ -47,7 +47,7 @@ public class UService {
             } else {
             	// if username/password pass validation, return status back to Client
             	logger.info("++++++ Logged In! ++++++");
-                return "logged";
+                return "successful";
             }
         }
     }
