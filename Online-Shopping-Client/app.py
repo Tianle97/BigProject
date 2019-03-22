@@ -144,9 +144,7 @@ def buyProduct():
     global id
     id = request.args.get('id')
     print(id)
-    Parsed_json = buy(id)
-    print('----->',Parsed_json['name'])
-    #print("username: ",user)
+    session['id'] = id
     return id
     #return render_template('buy.html', items = Parsed_json)
 
@@ -164,6 +162,47 @@ def getProduct():
     print("username:  ",session['username'])
     #print(Parsed_json)
     return render_template("buy.html", username = session['username'], item = Parsed_json)
+
+# post order infomation values
+@app.route('/getProduct',methods = ['POST']) 
+def info_get():
+    username = session['username']
+    form = request.form
+    amounts = form.get('amounts')
+    id = session['id']
+    Parsed_json = buy(id)
+    name = Parsed_json['name']
+    price = Parsed_json['price']
+    date = str(datetime.datetime.now())[:19]
+    print('----->',date)
+    totalPrice = amounts * price
+    photo = Parsed_json['photo']
+    # call this method for post the order details to back-end storage in mongodb
+    re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
+    if not amounts:
+        flash("please input amounts !")
+        return render_template("buy.html")
+    elif (amounts > Parsed_json['stocks']):
+        flash("sorry not enough amounts!")
+        return render_template("buy.html")
+    elif (re == 'seccess'):
+        return redirect('orderCreate')
+
+def ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo):
+    data = {'username': username, 'name': name,'amounts':amounts,'price':price, 'date':date, 'totalPrice':totalPrice, 'photo':photo}
+    url = 'http://127.0.0.1:8080/addOrderInfo'
+    r = requests.post(url, json = data)
+    Parsed_json = json.loads(r.text)
+    return Parsed_json['msg']
+ 
+@app.route('/orderCreate')
+def goOrderPage():
+    username = session['username']
+    url = 'http://127.0.0.1:8080/getOrderInfo?username'+username
+    r = request.get(url)
+    Parsed_json = json.loads(r.text)
+    
+    return render_template("orderCreate.html", username = session['username'], item = Parsed_json)
 
 @app.route('/logout')
 def logout():

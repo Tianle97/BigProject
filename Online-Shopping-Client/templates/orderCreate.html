@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block extraHead %}
+
+{% endblock %}
+    
+
+{% block mainBody %}
+<div class="bar" style="padding-top: 0px;" >
+        <div class="nav" >
+                <ul class="pc-nav" style="background-image:url(static/images/ic_down_nor.png);">
+                    <li><a href="/guys">Guys</a></li>
+                    <li><a href="/girls">Girls</a></li>
+                    <li><a href="/kids">Kids</a></li>
+                    <li><a href="/sale">Sales</a></li>
+                    <input type="text" placeholder="Lowest" class="scope" style="z-index: 1;float:left">
+                    <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
+                    <input type="text" placeholder="Highest" class="scope">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}  onclick="">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Register" onclick="window.location.href='/register'">
+                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
+                </ul>
+        </div>
+</div>
+<div id="productList">
+        <form action="/getProduct" method="Post" enctype="multipart/form-data"> 
+                <ul style="list-style: none;">
+                        
+                        <li id="itemLi">
+                                <p>
+                                        <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                        <br/>
+                                        <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
+                                        <br/>
+                                        {{ item['name'] }}
+                                        <br/>
+                                        {{ item['type'] }} 
+                                        <br/>
+                                        {{ item['date'] }} 
+                                </p>
+                                </p>
+                                
+                        </li>
+                </ul>
+        
+        </form>
+</div>
+{% endblock %}
