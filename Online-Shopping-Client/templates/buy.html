@@ -11,7 +11,7 @@
                 <ul class="pc-nav" style="background-image:url(static/images/ic_down_nor.png);">
                     <li><a href="/guys">Guys</a></li>
                     <li><a href="/girls">Girls</a></li>
-                    <li><a href="/jeans">Jeans</a></li>
+                    <li><a href="/kids">Kids</a></li>
                     <li><a href="/sale">Sales</a></li>
                     <input type="text" placeholder="Lowest" class="scope" style="z-index: 1;float:left">
                     <img src="{{url_for("static", filename="images/ic_Swap.png")}}"/>
@@ -41,9 +41,9 @@
                         </li>
                 </ul>
         
-                <p class="text1">Amount: </p>
+                <p class="text1">Amounts: </p>
                 <p class="text1">
-                        <input class="text1" name="amount" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
+                        <input class="text1" name="amounts" type="text" style="width: 240px; height: 25px;" autocomplete="off"/>
                 </p>
                 <p class="text3">{{get_flashed_messages()[0]}} </p>
                 <p class="text1">
