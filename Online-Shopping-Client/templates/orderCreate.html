@@ -24,26 +24,21 @@
         </div>
 </div>
 <div id="productList">
-        <form action="/getProduct" method="Post" enctype="multipart/form-data"> 
-                <ul style="list-style: none;">
-                        
-                        <li id="itemLi">
-                                <p>
-                                        <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
-                                        <br/>
-                                        <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
-                                        <br/>
-                                        {{ item['name'] }}
-                                        <br/>
-                                        {{ item['type'] }} 
-                                        <br/>
-                                        {{ item['date'] }} 
-                                </p>
-                                </p>
-                                
-                        </li>
-                </ul>
-        
-        </form>
+        <ul style="list-style: none;">
+                {% for item in items %}
+                <li id="itemLi">
+                        <p>
+                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                <br />
+                                <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
+                                <br />
+                                {{ item['name'] }}
+                                <br />
+                                {{ item['type'] }}
+                        </p>
+
+                </li>
+                {% endfor %}
+        </ul>
 </div>
 {% endblock %}

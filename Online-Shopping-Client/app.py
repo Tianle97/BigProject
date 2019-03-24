@@ -143,7 +143,7 @@ def addProduct():
 def buyProduct():
     global id
     id = request.args.get('id')
-    print(id)
+    print("aaaaaaaaaaaa ",id)
     session['id'] = id
     return id
     #return render_template('buy.html', items = Parsed_json)
@@ -157,10 +157,12 @@ def buy(id):
 @app.route('/buyPage') 
 def getProduct():
     global id
+    global bought
     Parsed_json = buy(id)
     print("buy",id)
     print("username:  ",session['username'])
     #print(Parsed_json)
+    bought = Parsed_json
     return render_template("buy.html", username = session['username'], item = Parsed_json)
 
 # post order infomation values
@@ -175,34 +177,39 @@ def info_get():
     price = Parsed_json['price']
     date = str(datetime.datetime.now())[:19]
     print('----->',date)
-    totalPrice = amounts * price
+    print('----->',amounts)
+    print('----->',name)
+    totalPrice = int(amounts) * int(price)
+    print('----->',totalPrice)
     photo = Parsed_json['photo']
     # call this method for post the order details to back-end storage in mongodb
     re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
+    global bought
     if not amounts:
         flash("please input amounts !")
-        return render_template("buy.html")
-    elif (amounts > Parsed_json['stocks']):
+        return render_template("buy.html", username = session['username'], item = bought)
+    elif (int(amounts) > int(Parsed_json['stocks'])):
         flash("sorry not enough amounts!")
-        return render_template("buy.html")
-    elif (re == 'seccess'):
+        return render_template("buy.html", username = session['username'], item = bought)
+    elif (re == 'create order seccessful'):
         return redirect('orderCreate')
 
 def ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo):
-    data = {'username': username, 'name': name,'amounts':amounts,'price':price, 'date':date, 'totalPrice':totalPrice, 'photo':photo}
+    data = {'username': username, 'name': name, 'amounts':amounts, 'price':price, 'date':date, 'totalPrice':totalPrice, 'photo':photo}
     url = 'http://127.0.0.1:8080/addOrderInfo'
     r = requests.post(url, json = data)
+    print("##########",username)
+    print("##########",r.text)
     Parsed_json = json.loads(r.text)
     return Parsed_json['msg']
  
 @app.route('/orderCreate')
 def goOrderPage():
     username = session['username']
-    url = 'http://127.0.0.1:8080/getOrderInfo?username'+username
-    r = request.get(url)
+    url = 'http://127.0.0.1:8080/getOrderInfo?username='+username
+    r = requests.get(url)
     Parsed_json = json.loads(r.text)
-    
-    return render_template("orderCreate.html", username = session['username'], item = Parsed_json)
+    return render_template("orderCreate.html", username = session['username'], items = Parsed_json)
 
 @app.route('/logout')
 def logout():
