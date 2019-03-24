@@ -3,7 +3,6 @@ package ie.gmit.sw.models;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
-//import javax.validation.constraints.*;
 
 
 @Entity
@@ -17,8 +16,6 @@ public class User {
 	private BigDecimal balance;
 	private String phone;
 	private String address;
-	
-	
 	
 	public User() {}
 

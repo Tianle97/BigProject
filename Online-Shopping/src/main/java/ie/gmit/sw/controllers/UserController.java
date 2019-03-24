@@ -26,10 +26,13 @@ public class UserController {
 		
 		@PostMapping("/register")
 		public Resp registerPost(@RequestBody User user) {
-			if(uService.findByUsername(user.getUsername()) == null){
+			if(user.getUsername()== null || user.getPassword() == null || user.getAddress() == null || user.getBalance() == null || user.getPhone() == null){
+				//uService.save(user);
+				return new Resp("error");
+			}else if (uService.findByUsername(user.getUsername()) == null && user.getUsername() != null) {
 				uService.save(user);
 				return new Resp("registered");
-			}else{
+			}else {
 				return new Resp("duplicate_user");
 			}
 		}

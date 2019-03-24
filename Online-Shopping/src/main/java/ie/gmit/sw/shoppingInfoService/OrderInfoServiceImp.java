@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ie.gmit.sw.models.OrderInfo;
+import ie.gmit.sw.models.Resp;
 import ie.gmit.sw.repositories.OrderInforRepositries;
 
 @Service("ShoppingInfoServiceImp")
@@ -27,10 +28,10 @@ public class OrderInfoServiceImp implements OrderInfoService {
 
 	// add user Shopping details save in mongodb
 	@Override
-	public String addOrderInfo(OrderInfo orderInfo) {
+	public Resp addOrderInfo(OrderInfo orderInfo) {
 		orderInforRepositries.save(orderInfo);
-
-		return "create order seccessful";
+		System.out.println("000000"+"create order seccessful");
+		return new Resp("create order seccessful");
 	}
 
 }
