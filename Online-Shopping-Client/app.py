@@ -30,6 +30,24 @@ def girl():
             girls.append(prod)
     return render_template('index.html', products = girls,)
 
+@app.route('/index-guys') 
+def guy():
+    Parsed_json = getProducts()
+    guys = []
+    for prod in Parsed_json:
+        if(prod['type'] == 'Guys'):
+            guys.append(prod)
+    return render_template('index.html', products = guys,)
+
+@app.route('/index-kids') 
+def kid():
+    Parsed_json = getProducts()
+    kids = []
+    for prod in Parsed_json:
+        if(prod['type'] == 'Kids'):
+            kids.append(prod)
+    return render_template('index.html', products = kids,)
+
 def getProducts():
     url = 'http://127.0.0.1:8080/show'
     r = requests.get(url)
