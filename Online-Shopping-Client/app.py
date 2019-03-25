@@ -149,16 +149,17 @@ def buyProduct():
     #return render_template('buy.html', items = Parsed_json)
 
 # A function send url to back-end for get product information from Mongodb
-def buy(id):
-    url = 'http://127.0.0.1:8080/buy?id='+id
+def buy(id, amount):
+    url = 'http://127.0.0.1:8080/buy?id='+id+'&amount='+amount
     r = requests.get(url)
+    print('tttttt',r.text)
     return json.loads(r.text)
 
 @app.route('/buyPage') 
 def getProduct():
     global id
     global bought
-    Parsed_json = buy(id)
+    Parsed_json = buy(id,'0')
     print("buy",id)
     print("username:  ",session['username'])
     #print(Parsed_json)
@@ -170,9 +171,12 @@ def getProduct():
 def info_get():
     username = session['username']
     form = request.form
-    amounts = form.get('amounts')
+    amounts = form.get('amounts') # this amount should remove from stock
+    if not amounts:
+        amounts = "0"
+    # mongoProduct ID
     id = session['id']
-    Parsed_json = buy(id)
+    Parsed_json = buy(id, amounts)
     name = Parsed_json['name']
     price = Parsed_json['price']
     date = str(datetime.datetime.now())[:19]
@@ -185,7 +189,9 @@ def info_get():
     # call this method for post the order details to back-end storage in mongodb
     re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
     global bought
-    if not amounts:
+    if (int(Parsed_json['stocks']) == 0):
+        return redirect('orderCreate')
+    if (int(amounts) == 0):
         flash("please input amounts !")
         return render_template("buy.html", username = session['username'], item = bought)
     elif (int(amounts) > int(Parsed_json['stocks'])):

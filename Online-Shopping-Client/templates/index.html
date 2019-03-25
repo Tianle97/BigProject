@@ -4,29 +4,35 @@
 <script type="text/javascript">
         function getId(el) {
                 var id = el.id;
-                // dataJson = {'id':data}
-                // alert(dataJson.id);
-                console.log(id);
-                $.ajax({
-                        url: '/buyProduct?id=' + id,//自己的服务接口地址
-                        type: 'POST',
-                        success: function (data) {
-                                if($('#login').val('Login'))
-                                {
+                console.log(el.name);
+                if(el.name != 0){
+                        // dataJson = {'id':data}
+                        // alert(dataJson.id);
+                        console.log(id);
+                        $.ajax({
+                                url: '/buyProduct?id=' + id,//自己的服务接口地址
+                                type: 'POST',
+                                success: function (data) {
+                                        if($('#login').val('Login'))
+                                        {
+                                                redirectLogin();
+                                        }
+                                        else{
+                                                redirect();
+                                        }
+                                        
+                                        // location.replace("localhost:5000/buy");
+
+                                },
+                                error: function () {
                                         redirectLogin();
-                                }
-                                else{
-                                        redirect();
-                                }
-                                
-                                // location.replace("localhost:5000/buy");
+                                },
 
-                        },
-                        error: function () {
-                                redirectLogin();
-                        },
+                        });
+                }else{
+                        alert("this item is solt out !");
+                }
 
-                });
         }
 
         function redirect() {
@@ -48,7 +54,7 @@
                         <li><a href="/guys">Guys</a></li>
                         <li><a href="/girls">Girls</a></li>
                         <li><a href="/kids">Kids</a></li>
-                        <li><a href="/sale">Sales</a></li>
+                        <li>Sales</li>
                         <input type="text" placeholder="Lowest" class="scope" style="z-index: 1;float:left">
                         <img src="{{url_for("static", filename="images/ic_Swap.png")}}" />
                         <input type="text" placeholder="Highest" class="scope">
@@ -67,7 +73,7 @@
                 {% for item in products %}
                 <li id="itemLi">
                         <p>
-                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}} name={{item['stocks']}}>>
                                 <br />
                                 <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                 <br />
