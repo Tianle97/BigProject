@@ -7,6 +7,9 @@ import base64
 app = Flask(__name__)
 app.secret_key = "123"
 
+global user
+user = ''
+
 # drump to the default page(welcome page)
 @app.route('/')
 def welcome():
@@ -47,7 +50,7 @@ def ServerLogin(user,psd):
 
 @app.route('/login',methods=['POST'])
 def login_get():
-    #global user
+    global user
     form = request.form
     username = form.get('username')
     password = form.get('password')
@@ -58,6 +61,7 @@ def login_get():
         flash("please input password !")
     elif(re == 'successful'):
         session['username'] = username
+        user = username
         return redirect("logined")
     else:
         flash("username/password is wrong!")
@@ -220,6 +224,9 @@ def ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo):
  
 @app.route('/orderCreate')
 def goOrderPage():
+    global user
+    if(user == ''):
+        return redirect('login')
     username = session['username']
     url = 'http://127.0.0.1:8080/getOrderInfo?username='+username
     r = requests.get(url)
@@ -229,6 +236,8 @@ def goOrderPage():
 @app.route('/logout')
 def logout():
    # remove the username from the session if it is there
+   global user
+   user = ''
    session.pop('username', None)
    return redirect(url_for('index'))
 

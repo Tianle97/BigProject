@@ -1,24 +1,39 @@
 {% extends "layout.html" %}
 
 {% block extraHead %}
-        <script type="text/javascript">
-            function getId(el){
+<script type="text/javascript">
+        function getId(el) {
                 var id = el.id;
-                // dataJson = {'id':data}
-                // alert(dataJson.id);
-                console.log(id);
-                $.ajax({
-                        url: '/buyProduct?id='+id,//自己的服务接口地址
-                        type: 'POST',
-                        success: function (id) {
-                                redirect();
-                        },
-                        error:function() {
-           	 	        alert("error");
-                        },
-                        
-                });
-             }
+                console.log(el.name);
+                if(el.name != 0){
+                        // dataJson = {'id':data}
+                        // alert(dataJson.id);
+                        console.log(id);
+                        $.ajax({
+                                url: '/buyProduct?id=' + id,//自己的服务接口地址
+                                type: 'POST',
+                                success: function (data) {
+                                        if($('#login').val('Login'))
+                                        {
+                                                redirectLogin();
+                                        }
+                                        else{
+                                                redirect();
+                                        }
+                                        
+                                        // location.replace("localhost:5000/buy");
+
+                                },
+                                error: function () {
+                                        redirectLogin();
+                                },
+
+                        });
+                }else{
+                        alert("this item is solt out !");
+                }
+
+        }
 
         function redirect() {
                 window.location.href = "http://127.0.0.1:5000/buyPage";
