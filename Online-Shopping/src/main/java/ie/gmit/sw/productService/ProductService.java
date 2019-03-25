@@ -9,4 +9,5 @@ public interface ProductService {
 	public ArrayList<MongoProduct> getProduct();
 	public ArrayList<MongoProduct> showAll();
 	public MongoProduct findById(String id);
+	public String updateProduct(MongoProduct product);
 }

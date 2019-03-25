@@ -41,10 +41,15 @@ public class ProductController {
 	}
 
 	@GetMapping("/buy")
-	public MongoProduct buyProduct(@RequestParam("id") String id) {
-
-		System.out.println("!!!" + productService.findById(id));
-		return productService.findById(id);
+	public MongoProduct buyProduct(@RequestParam("id") String id, @RequestParam("amount") int amount) {
+		MongoProduct prod = productService.findById(id);
+		MongoProduct new_prod = prod;
+		int stocks = prod.getStocks() - amount;
+		if (stocks >= 0){
+			new_prod.setStocks(prod.getStocks() - amount);
+			productService.updateProduct(new_prod);
+		}
+		return prod;
 	}
 
 	@ResponseBody

@@ -65,5 +65,18 @@ public class ProductServiceImp implements ProductService{
 	public String buyProduct(BigDecimal price){
 		return null;
 	}
+	
+	public String updateProduct(MongoProduct product) {
+		
+		MongoProduct mp = null;
+		mp = monRepository.findById(product.getId());
+		try {
+			monRepository.delete(mp);
+			monRepository.save(product);
+		} catch (Exception e) {
+			logger.error("++++ User failed to be saved... Reason: " + e.getMessage() + " ++++");
+		}
+		return "success to update";
+	}
 
 }

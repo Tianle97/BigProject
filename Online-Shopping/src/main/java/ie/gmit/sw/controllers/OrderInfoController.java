@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.gmit.sw.models.OrderInfo;
 import ie.gmit.sw.models.Resp;
+import ie.gmit.sw.productService.ProductService;
 import ie.gmit.sw.shoppingInfoService.OrderInfoService;
 
 @RestController
@@ -20,7 +21,7 @@ public class OrderInfoController {
 	@Autowired
 	@Qualifier("ShoppingInfoServiceImp")
 	private OrderInfoService orderInfoService;
-
+	
 	@ResponseBody
 	@PostMapping("/addOrderInfo")
 	public Resp saveOrderInfo(@RequestBody OrderInfo orderInfo) {
