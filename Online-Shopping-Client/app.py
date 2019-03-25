@@ -18,6 +18,15 @@ def index():
     print(Parsed_json[0]['name'])
     return render_template('index.html', products = Parsed_json,)
 
+@app.route('/index-girls') 
+def girl():
+    Parsed_json = getProducts()
+    girls = []
+    for prod in Parsed_json:
+        if(prod['type'] == 'Girls'):
+            girls.append(prod)
+    return render_template('index.html', products = girls,)
+
 def getProducts():
     url = 'http://127.0.0.1:8080/show'
     r = requests.get(url)
