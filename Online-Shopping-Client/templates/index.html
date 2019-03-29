@@ -5,6 +5,7 @@
         function getId(el) {
                 var id = el.id;
                 console.log(el.name);
+                console.log($('#login').val)
                 if(el.name != 0){
                         // dataJson = {'id':data}
                         // alert(dataJson.id);
@@ -13,7 +14,7 @@
                                 url: '/buyProduct?id=' + id,//自己的服务接口地址
                                 type: 'POST',
                                 success: function (data) {
-                                        if($('#login').val('Login'))
+                                        if($('#login').val == "")
                                         {
                                                 redirectLogin();
                                         }
@@ -60,7 +61,7 @@
                         <input type="text" placeholder="Highest" class="scope">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
                                 value="Confirm" id="queren">
-                                <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value='Login' onclick="window.location.href='/login'">
+                                <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}} onclick="window.location.href='/login'">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
                                 value="Register" onclick="window.location.href='/register'">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
@@ -73,7 +74,7 @@
                 {% for item in products %}
                 <li id="itemLi">
                         <p>
-                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}} name={{item['stocks']}}>>
+                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}} name={{item['stocks']}}>
                                 <br />
                                 <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                 <br />

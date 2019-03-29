@@ -13,13 +13,8 @@
                                 url: '/buyProduct?id=' + id,//自己的服务接口地址
                                 type: 'POST',
                                 success: function (data) {
-                                        if($('#login').val('Login'))
-                                        {
-                                                redirectLogin();
-                                        }
-                                        else{
-                                                redirect();
-                                        }
+                                        
+                                        redirect();
                                         
                                         // location.replace("localhost:5000/buy");
 
@@ -30,13 +25,17 @@
 
                         });
                 }else{
-                        alert("this item is solt out !");
+                        alert(el.name,"this item is solt out !");
                 }
 
         }
 
         function redirect() {
                 window.location.href = "http://127.0.0.1:5000/buyPage";
+        }
+
+        function redirectLogin() {
+                window.location.href = "http://127.0.0.1:5000/login";
         }
         </script>
 
@@ -65,7 +64,7 @@
                 {% for item in items %}
                 <li id="itemLi">
                         <p>
-                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
+                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}} name={{ item['stocks'] }}>
                                 <br />
                                 <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
                                 <br />

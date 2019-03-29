@@ -19,7 +19,7 @@ def welcome():
 def index():
     Parsed_json = getProducts()
     print(Parsed_json[0]['name'])
-    return render_template('index.html', products = Parsed_json,)
+    return render_template('index.html', products = Parsed_json, username = "Login")
 
 @app.route('/index-girls') 
 def girl():
@@ -28,7 +28,7 @@ def girl():
     for prod in Parsed_json:
         if(prod['type'] == 'Girls'):
             girls.append(prod)
-    return render_template('index.html', products = girls,)
+    return render_template('index.html', products = girls)
 
 @app.route('/index-guys') 
 def guy():
@@ -37,7 +37,7 @@ def guy():
     for prod in Parsed_json:
         if(prod['type'] == 'Guys'):
             guys.append(prod)
-    return render_template('index.html', products = guys,)
+    return render_template('index.html', products = guys)
 
 @app.route('/index-kids') 
 def kid():
@@ -46,7 +46,7 @@ def kid():
     for prod in Parsed_json:
         if(prod['type'] == 'Kids'):
             kids.append(prod)
-    return render_template('index.html', products = kids,)
+    return render_template('index.html', products = kids)
 
 def getProducts():
     url = 'http://127.0.0.1:8080/show'
@@ -89,7 +89,8 @@ def login_get():
 def longined():
     Parsed_json = getProducts()
     print("username: ",session['username'])
-    return render_template("logined.html",username=session['username'],items = Parsed_json)
+    print(Parsed_json[0]['name'])
+    return render_template("index.html",username=session['username'],products = Parsed_json)
 
 @app.route('/register')
 def register_init():
