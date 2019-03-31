@@ -1,4 +1,5 @@
 from flask import Flask, url_for, render_template, request, json, jsonify, flash, redirect, session
+from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import datetime
 import time
@@ -72,12 +73,13 @@ def login_get():
     form = request.form
     username = form.get('username')
     password = form.get('password')
+    print("pas: ",password)
     re = ServerLogin(username,password)
     if not username:
         flash("please input username !")
     elif not password:
         flash("please input password !")
-    elif(re == 'successful'):
+    elif(check_password_hash(re,password) == True):
         session['username'] = username
         user = username
         return redirect("logined")
@@ -108,7 +110,8 @@ def ServerRegister(user,psd,add,ph,bal):
 def register():
     form = request.form
     username = form.get('username')
-    password = form.get('password')
+    password = generate_password_hash(form.get('password'))
+    print("pas: ", password)
     address = form.get('address')
     phone = form.get('phone')
     balance = form.get('balance')
