@@ -1,4 +1,4 @@
-package ie.gmit.sw.shoppingInfoService;
+package ie.gmit.sw.orderInfoService;
 
 import java.util.ArrayList;
 
