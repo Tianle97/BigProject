@@ -1,5 +1,0 @@
-package ie.gmit.sw.repositories;
-
-public interface URepository {
-
-}

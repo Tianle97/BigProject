@@ -5,6 +5,7 @@ html {
 body {
     margin: 0;
     padding-bottom:50px;
+    color: white;
 }
 div {
     display: block;
@@ -141,4 +142,3 @@ bar a {
     padding-bottom:50px;
     display: inline-block;
 }
-
