@@ -30,7 +30,7 @@
 {% block mainBody %}
 <div class="loginform">
         <div class="border">
-            <img width="60" height="60" src="{{url_for("static", filename="images/Group 2.png")}}" />
+            <img width="60" height="60" src="{{url_for("static", filename="images/ic_shopbag.png")}}" />
             <form id="formRegister" action="/add" method="Post" enctype="multipart/form-data">
             
                 <p class="text1">Name：</p>
@@ -66,8 +66,8 @@
                 <p class="text3">{{get_flashed_messages()[0]}} </p>
                 <p class="text1">
                         <button onclick="submit" style="margin: 0; padding: 0; border-width: 0;">
-                                <img width="70" height="25"
-                                     src="{{url_for("static", filename="images/registerButton.png")}}" />
+                                <img width="80" height="30"
+                                     src="{{url_for("static", filename="images/confirm-button.svg")}}"/>
                             </button> 
                     <a style="font-size:10px; margin-left:15px;" href="/index">back to main pages!</a>
                 </p>
