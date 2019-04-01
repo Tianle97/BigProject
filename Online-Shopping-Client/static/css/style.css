@@ -5,7 +5,7 @@ html {
 body {
     margin: 0;
     padding-bottom:50px;
-    color: white;
+    color: black;
 }
 div {
     display: block;
@@ -26,6 +26,8 @@ div {
     position: relative;
 }
 
+
+
 #header {
 	background-color:whiteite;
 }
@@ -40,6 +42,7 @@ div {
     height:20px;
     padding-right:5px;
 }
+
 #icon span {
     color:black;
     font-size:10px;
@@ -107,7 +110,7 @@ bar a {
 }
 .confirm {
     height: 30px;
-    width: 60px;
+    width: 80;
     color: white;
     z-index: 1;
     float: left;
