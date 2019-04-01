@@ -18,36 +18,52 @@ def welcome():
 
 @app.route('/index') 
 def index():
+    global user
     Parsed_json = getProducts()
-    print(Parsed_json[0]['name'])
-    return render_template('index.html', products = Parsed_json, username = "Login")
+    #print("qqq",session['username'])
+    if (user == ""):
+        return render_template('index.html', products = Parsed_json, username = "Login")
+    else :
+        return render_template('index.html', products = Parsed_json, username = session['username'])
 
 @app.route('/index-girls') 
 def girl():
+    global user
     Parsed_json = getProducts()
     girls = []
     for prod in Parsed_json:
         if(prod['type'] == 'Girls'):
             girls.append(prod)
-    return render_template('index.html', products = girls)
+    if (user == ""):
+        return render_template('index.html', products = girls, username = "Login")
+    else :
+        return render_template('index.html', products = girls, username = session['username'])
 
 @app.route('/index-guys') 
 def guy():
+    global user
     Parsed_json = getProducts()
     guys = []
     for prod in Parsed_json:
         if(prod['type'] == 'Guys'):
             guys.append(prod)
-    return render_template('index.html', products = guys)
+    if (user == ""):
+        return render_template('index.html', products = guys, username = "Login")
+    else :
+        return render_template('index.html', products = guys, username = session['username'])
 
 @app.route('/index-kids') 
 def kid():
+    global user
     Parsed_json = getProducts()
     kids = []
     for prod in Parsed_json:
         if(prod['type'] == 'Kids'):
             kids.append(prod)
-    return render_template('index.html', products = kids)
+    if (user == ""):
+        return render_template('index.html', products = kids, username = "Login")
+    else :
+        return render_template('index.html', products = kids, username = session['username'])
 
 def getProducts():
     url = 'http://127.0.0.1:8080/show'
@@ -79,6 +95,7 @@ def login_get():
         flash("please input username !")
     elif not password:
         flash("please input password !")
+    # Compare the password if result == true, it will go to route "logined"
     elif(check_password_hash(re,password) == True):
         session['username'] = username
         user = username
@@ -89,17 +106,18 @@ def login_get():
 
 @app.route('/logined')
 def longined():
+    global user
+    user = session['username']
     Parsed_json = getProducts()
     print("username: ",session['username'])
-    print(Parsed_json[0]['name'])
-    return render_template("index.html",username=session['username'],products = Parsed_json)
+    return render_template("index.html",username=session['username'], products = Parsed_json)
 
 @app.route('/register')
 def register_init():
     return render_template("register.html")
 
-def ServerRegister(user,psd,add,ph,bal):
-    data = {'username': user, 'password': psd,'address':add,'phone':ph,'balance':bal}
+def ServerRegister(user,psd,add,ph):
+    data = {'username': user, 'password': psd,'address':add,'phone':ph}
     url = 'http://127.0.0.1:8080/register'
     r = requests.post(url, json = data)
     Parsed_json = json.loads(r.text)
@@ -114,8 +132,7 @@ def register():
     print("pas: ", password)
     address = form.get('address')
     phone = form.get('phone')
-    balance = form.get('balance')
-    re = ServerRegister(username, password,address,phone,balance)
+    re = ServerRegister(username, password,address,phone)
     if not username:
         flash("please input username !")
         return render_template("register.html")
@@ -132,9 +149,13 @@ def register():
 # For user add product to the index page
 @app.route('/addProduct')
 def addProduct_init():
-    return render_template("addProduct.html")
+    global user
+    print("uuu  ",user)
+    if (user == ""):
+        return redirect('login')
+    else:
+        return render_template("addProduct.html")
 
-# 
 def ServerAddProduct(name, price, t, ph, st):
     data = {'name': name, 'price': price,'type':t,'photo':ph, 'stocks':st}
     url = 'http://127.0.0.1:8080/addProduct'
@@ -177,11 +198,12 @@ def addProduct():
 @app.route('/buyProduct',methods = ['POST']) 
 def buyProduct():
     global id
+
     id = request.args.get('id')
     print("aaaaaaaaaaaa ",id)
     session['id'] = id
     return id
-    #return render_template('buy.html', items = Parsed_json)
+        #return render_template('buy.html', items = Parsed_json)
 
 # A function send url to back-end for get product information from Mongodb
 def buy(id, amount):
@@ -194,12 +216,16 @@ def buy(id, amount):
 def getProduct():
     global id
     global bought
-    Parsed_json = buy(id,'0')
-    print("buy",id)
-    print("username:  ",session['username'])
-    #print(Parsed_json)
-    bought = Parsed_json
-    return render_template("buy.html", username = session['username'], item = Parsed_json)
+    global user
+    if (user == ""):
+        return redirect('login')
+    else :
+        Parsed_json = buy(id,'0')
+        print("buy",id)
+        print("username:  ",session['username'])
+        #print(Parsed_json)
+        bought = Parsed_json
+        return render_template("buy.html", username = session['username'], item = Parsed_json)
 
 # post order infomation values
 @app.route('/getProduct',methods = ['POST']) 
