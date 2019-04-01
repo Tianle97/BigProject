@@ -1,7 +1,5 @@
 package ie.gmit.sw.models;
 
-import java.math.BigDecimal;
-
 import javax.persistence.*;
 
 
@@ -13,7 +11,6 @@ public class User {
 	private int uid;
 	private String username;
 	private String password;
-	private BigDecimal balance;
 	private String phone;
 	private String address;
 	
@@ -38,14 +35,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
 	}
 
 	public String getPhone() {

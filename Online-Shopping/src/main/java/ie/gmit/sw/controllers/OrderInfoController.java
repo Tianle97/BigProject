@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ie.gmit.sw.models.OrderInfo;
 import ie.gmit.sw.models.Resp;
 import ie.gmit.sw.orderInfoService.OrderInfoService;
-import ie.gmit.sw.productService.ProductService;
 
 @RestController
 public class OrderInfoController {
