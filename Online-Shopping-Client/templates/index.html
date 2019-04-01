@@ -5,7 +5,6 @@
         function getId(el) {
                 var id = el.id;
                 console.log(el.name);
-                console.log($('#login').val)
                 if(el.name != 0){
                         // dataJson = {'id':data}
                         // alert(dataJson.id);
@@ -14,16 +13,8 @@
                                 url: '/buyProduct?id=' + id,//自己的服务接口地址
                                 type: 'POST',
                                 success: function (data) {
-                                        if($('#login').val == "")
-                                        {
-                                                redirectLogin();
-                                        }
-                                        else{
-                                                redirect();
-                                        }
-                                        
+                                        redirect();
                                         // location.replace("localhost:5000/buy");
-
                                 },
                                 error: function () {
                                         redirectLogin();
@@ -33,20 +24,14 @@
                 }else{
                         alert("this item is solt out !");
                 }
-
         }
 
         function redirect() {
                 window.location.href = "http://127.0.0.1:5000/buyPage";
         }
-        function redirectLogin() {
-                window.location.href = "http://127.0.0.1:5000/login";
-        }
-
 </script>
 
 {% endblock %}
-
 
 {% block mainBody %}
 <div class="bar" style="padding-top: 0px;">
@@ -61,11 +46,10 @@
                         <input type="text" placeholder="Highest" class="scope">
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
                                 value="Confirm" id="queren">
-                                <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}} onclick="window.location.href='/login'">
+                        <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}} id = "login">
+                        
                         <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
-                                value="Register" onclick="window.location.href='/register'">
-                        <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);"
-                                value="Add Product" onclick="window.location.href='/addProduct'">
+                                value="Add Product" onclick="window.location.href='/addProduct'"  width: 80;>
                 </ul>
         </div>
 </div>
@@ -77,12 +61,14 @@
                                 <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}} name={{item['stocks']}}>
                                 <br />
                                 <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
-                                <br />
-                                {{ item['name'] }}
-                                <br />
-                                stocks: {{ item['stocks'] }}
-                                <br />
-                                {{ item['type'] }}
+                                <span style="color:blue;font-size:1.1em;">
+                                        <br />
+                                        Name:        {{ item['name'] }}
+                                        <br />
+                                        stocks:      {{ item['stocks'] }}
+                                        <br />
+                                        Style:       {{ item['type'] }}
+                                </span>
                         </p>
 
                 </li>
