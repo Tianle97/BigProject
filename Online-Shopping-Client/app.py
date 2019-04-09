@@ -22,7 +22,7 @@ def index():
     Parsed_json = getProducts()
     #print("qqq",session['username'])
     if (user == ""):
-        return render_template('index.html', products = Parsed_json, username = "Login")
+        return render_template('index.html', products = Parsed_json, username = "Username")
     else :
         return render_template('index.html', products = Parsed_json, username = session['username'])
 
@@ -35,7 +35,7 @@ def girl():
         if(prod['type'] == 'Girls'):
             girls.append(prod)
     if (user == ""):
-        return render_template('index.html', products = girls, username = "Login")
+        return render_template('index.html', products = girls, username = "Username")
     else :
         return render_template('index.html', products = girls, username = session['username'])
 
@@ -48,7 +48,7 @@ def guy():
         if(prod['type'] == 'Guys'):
             guys.append(prod)
     if (user == ""):
-        return render_template('index.html', products = guys, username = "Login")
+        return render_template('index.html', products = guys, username = "Username")
     else :
         return render_template('index.html', products = guys, username = session['username'])
 
@@ -61,7 +61,7 @@ def kid():
         if(prod['type'] == 'Kids'):
             kids.append(prod)
     if (user == ""):
-        return render_template('index.html', products = kids, username = "Login")
+        return render_template('index.html', products = kids, username = "Username")
     else :
         return render_template('index.html', products = kids, username = session['username'])
 
@@ -150,7 +150,6 @@ def register():
 @app.route('/addProduct')
 def addProduct_init():
     global user
-    print("uuu  ",user)
     if (user == ""):
         return redirect('login')
     else:
@@ -230,11 +229,16 @@ def getProduct():
 # post order infomation values
 @app.route('/getProduct',methods = ['POST']) 
 def info_get():
+    global bought
     username = session['username']
     form = request.form
     amounts = form.get('amounts') # this amount should remove from stock
-    if not amounts:
-        amounts = "0"
+    # Firstly must compare the amount 
+    # witch is user want buy the number of the products 
+    # if the amounts == 0 or empty in the input box
+    if (not amounts or int(amounts) == 0):
+        flash("please input amounts !")
+        return render_template("buy.html", username = session['username'], item = bought)
     # mongoProduct ID
     id = session['id']
     Parsed_json = buy(id, amounts)
@@ -249,12 +253,8 @@ def info_get():
     photo = Parsed_json['photo']
     # call this method for post the order details to back-end storage in mongodb
     re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
-    global bought
     if (int(Parsed_json['stocks']) == 0):
         return redirect('orderCreate')
-    if (int(amounts) == 0):
-        flash("please input amounts !")
-        return render_template("buy.html", username = session['username'], item = bought)
     elif (int(amounts) > int(Parsed_json['stocks'])):
         flash("sorry not enough amounts!")
         return render_template("buy.html", username = session['username'], item = bought)

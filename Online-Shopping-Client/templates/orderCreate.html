@@ -35,13 +35,16 @@
                                         <br />
                                         Name: {{ item['name'] }}
                                         <br />
-                                        Style: {{ item['type'] }}
-                                        <br />
-                                        Single price {{ item['price'] }}
-                                        <br />
                                         Amounts: {{ item['amounts'] }}
                                         <br />
-                                        Totall price {{ item['totalPrice'] }}
+                                        Totall price
+                                </span>
+
+                                <span style="color:red;font-size:1.1em;"> 
+                                        &#8364;{{ item['totalPrice'] }}
+                                </span>   
+                                     
+                                <span style="color:darkorange;font-size:1.1em;">        
                                         <br />
                                         {{ item['date'] }}
                                 </span>

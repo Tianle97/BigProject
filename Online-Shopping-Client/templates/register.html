@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block extraHead %}
-    <link rel="stylesheet" href="{{ url_for("static", filename="css/login.css") }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/addProduct.css") }}" type="text/css"/>
 {% endblock %}
 
 {% block mainBody %}
@@ -32,7 +32,7 @@
                         <img width="70" height="25"
                              src="{{url_for("static", filename="images/registerButton.png")}}" />
                     </button>
-                    <a style="font-size:10px; margin-left:15px;" href="/login">back to log in !</a>
+                    <a style="font-size:10px; margin-left:15px;" href="/login">go to log-in !</a>
                 </p>
              </form>
         </div>

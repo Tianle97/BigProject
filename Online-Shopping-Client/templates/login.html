@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block extraHead %}
-    <link rel="stylesheet" href="{{ url_for("static", filename="css/login.css") }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/addProduct.css") }}" type="text/css"/>
 {% endblock %}
 
 {% block mainBody %}
@@ -17,7 +17,7 @@
                 <p class="text1">
                     <input class="text1" name="password" type="password" style="width: 240px; height: 25px;" autocomplete="off"/>
                 </p>
-                
+               
                 <p class="text3">{{get_flashed_messages()[0]}} </p>
                 <p class="text1">
                     <button onclick="submit" style="margin: 0; padding: 0; border-width: 0;">
