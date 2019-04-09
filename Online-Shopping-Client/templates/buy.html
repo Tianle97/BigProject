@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block extraHead %}
-
+        <link rel="stylesheet" href="{{ url_for("static", filename="css/addProduct.css") }}" type="text/css"/>
 {% endblock %}
     
 
@@ -32,12 +32,14 @@
                                         <img width="200" height="200" src={{item['photo']}} id={{item['id']}}>
                                         <br/>
                                         <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
-                                        <br/>
-                                        {{ item['name'] }}
-                                        <br/>
-                                        {{ item['type'] }} 
-                                        <br/>
-                                        {{ item['stocks'] }} 
+                                        <span style="color:blue;font-size:1.1em;">
+                                                <br/>
+                                                {{ item['name'] }}
+                                                <br/>
+                                                {{ item['type'] }} 
+                                                <br/>
+                                                {{ item['stocks'] }} 
+                                        </span>
                                 </p>
                                 
                         </li>
