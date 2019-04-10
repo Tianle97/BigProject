@@ -30,8 +30,17 @@ public class OrderInfoServiceImp implements OrderInfoService {
 	@Override
 	public Resp addOrderInfo(OrderInfo orderInfo) {
 		orderInforRepositries.save(orderInfo);
+		//Just for check
 		System.out.println("000000"+"create order seccessful");
 		return new Resp("create order seccessful");
 	}
-
+	
+	@Override
+	public Resp deleteById(String id) {
+		// TODO Auto-generated method stub
+		OrderInfo orderInfo = orderInforRepositries.findById(id);
+		System.out.println(orderInfo.getId());
+		orderInforRepositries.delete(orderInfo);
+		return new Resp("delete succssful");
+	}
 }

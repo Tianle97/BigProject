@@ -24,6 +24,7 @@ public class OrderInfoController {
 	@ResponseBody
 	@PostMapping("/addOrderInfo")
 	public Resp saveOrderInfo(@RequestBody OrderInfo orderInfo) {
+		//Just for check
 		System.out.println("0000000"+orderInfo.getName());
 		return orderInfoService.addOrderInfo(orderInfo);
 	}
@@ -32,5 +33,12 @@ public class OrderInfoController {
 	public ArrayList<OrderInfo> getOrderInfo(@RequestParam("username") String username) {
 		return orderInfoService.showAll(username);
 	}
-
+	
+	@ResponseBody
+	@PostMapping("/deleteOrderInfo")
+	public Resp deleteOrderInfo(@RequestParam("id") String id) {
+		//Just for check
+		System.out.println("0000000"+id);
+		return orderInfoService.deleteById(id);
+	}
 }

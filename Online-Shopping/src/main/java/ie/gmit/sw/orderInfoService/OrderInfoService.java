@@ -7,6 +7,7 @@ import ie.gmit.sw.models.Resp;
 
 
 public interface OrderInfoService {
-	public Resp addOrderInfo(OrderInfo shoppingInfo);
+	public Resp addOrderInfo(OrderInfo orderInfo);
 	public ArrayList<OrderInfo> showAll(String username);
+	public Resp deleteById(String id);
 }
