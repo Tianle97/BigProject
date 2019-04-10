@@ -2,6 +2,37 @@
 
 {% block extraHead %}
 
+<script type="text/javascript">
+        function getId(el) {
+                var id = el.id;
+                console.log(id);
+                if (confirm("Are you sure you want to delete this Order?"))
+                {
+                        $.ajax({
+                                url: '/deleteOrderInfo?id=' + id,//自己的服务接口地址
+                                type: 'POST',
+                                success: function (data) {
+                                        redirect();
+                                        console.log("successful to delete!");
+                                },
+                                error: function () {
+                                        redirectOriginal();
+                                        console.log("oops! have some errors!");
+                                },
+                        });
+                }
+                else{
+                        redirectOriginal();
+                }
+        }
+        function redirect() {
+                window.location.href = "http://127.0.0.1:5000/deleteOrderInfo";
+        }
+        function redirectOriginal(){
+                window.location.href = "http://127.0.0.1:5000/orderCreate";
+        }
+</script>
+
 {% endblock %}
     
 
@@ -26,32 +57,30 @@
 <div id="productList">
         <ul style="list-style: none;">
                 {% for item in items %}
-                <li id="itemLi">
-                        <p>
-                                <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
-                                <br />
-                                <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
-                                <span style="color:blue;font-size:1.1em;">
+                        <li id="itemLi">
+                                <p>
+                                        <img width="200" height="200" src={{item['photo']}} onclick="getId(this)" id={{item['id']}}>
                                         <br />
-                                        Name: {{ item['name'] }}
-                                        <br />
-                                        Amounts: {{ item['amounts'] }}
-                                        <br />
-                                        Totall price
-                                </span>
+                                        <span style="color:red;font-size:1.1em;">&#8364;{{item['price']}}</span>
+                                        <span style="color:blue;font-size:1.1em;">
+                                                <br />
+                                                Name: {{ item['name'] }}
+                                                <br />
+                                                Amounts: {{ item['amounts'] }}
+                                                <br />
+                                                Totall price
+                                        </span>
 
-                                <span style="color:red;font-size:1.1em;"> 
-                                        &#8364;{{ item['totalPrice'] }}
-                                </span>   
-                                     
-                                <span style="color:darkorange;font-size:1.1em;">        
-                                        <br />
-                                        {{ item['date'] }}
-                                </span>
-
-                        </p>
-
-                </li>
+                                        <span style="color:red;font-size:1.1em;"> 
+                                                &#8364;{{ item['totalPrice'] }}
+                                        </span>   
+                                        
+                                        <span style="color:darkorange;font-size:1.1em;">        
+                                                <br />
+                                                {{ item['date'] }}
+                                        </span>
+                                </p>
+                        </li>
                 {% endfor %}
         </ul>
 </div>
