@@ -197,18 +197,18 @@ def addProduct():
 @app.route('/buyProduct',methods = ['POST']) 
 def buyProduct():
     global id
-
     id = request.args.get('id')
-    print("aaaaaaaaaaaa ",id)
+    print(id)
     session['id'] = id
     return id
-        #return render_template('buy.html', items = Parsed_json)
+    #return render_template('buy.html', items = Parsed_json)
 
 # A function send url to back-end for get product information from Mongodb
 def buy(id, amount):
     url = 'http://127.0.0.1:8080/buy?id='+id+'&amount='+amount
     r = requests.get(url)
-    print('tttttt',r.text)
+    # Just for check
+    print('return from end-back server: ',r.text)
     return json.loads(r.text)
 
 @app.route('/buyPage') 
@@ -221,13 +221,14 @@ def getProduct():
     else :
         Parsed_json = buy(id,'0')
         print("buy",id)
+        session['id'] = id
         print("username:  ",session['username'])
         #print(Parsed_json)
         bought = Parsed_json
         return render_template("buy.html", username = session['username'], item = Parsed_json)
 
 # post order infomation values
-@app.route('/buyProduct',methods = ['POST']) 
+@app.route('/getProduct',methods = ['POST']) 
 def info_get():
     global bought
     username = session['username']
@@ -256,6 +257,7 @@ def info_get():
     if (int(Parsed_json['stocks']) == 0):
         return redirect('orderCreate')
     elif (int(amounts) > int(Parsed_json['stocks'])):
+        print("error stocks: ", int(Parsed_json['stocks']))
         flash("sorry not enough amounts!")
         return render_template("buy.html", username = session['username'], item = bought)
     elif (re == 'create order seccessful'):
