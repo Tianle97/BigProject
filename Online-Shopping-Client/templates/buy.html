@@ -18,13 +18,12 @@
                     <input type="text" placeholder="Highest" class="scope">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Confirm" id="queren">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value={{username}}  onclick="">
-                    <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Register" onclick="window.location.href='/register'">
                     <input type="button" class="confirm" style="background-image: url(static/images/ic_down_pre.png);" value="Add Product" onclick="window.location.href='/addProduct'">
                 </ul>
         </div>
 </div>
 <div id="productList">
-        <form action="/buyProduct" method="Post" enctype="multipart/form-data"> 
+        <form action="/getProduct" method="Post" enctype="multipart/form-data"> 
                 <ul style="list-style: none;">
                         
                         <li id="itemLi">

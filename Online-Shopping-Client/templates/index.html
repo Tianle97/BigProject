@@ -5,6 +5,7 @@
         function getId(el) {
                 var id = el.id;
                 console.log(el.name);
+                console.log(id);
                 if(el.name != 0){
                         // dataJson = {'id':data}
                         // alert(dataJson.id);
@@ -17,7 +18,7 @@
                                         // location.replace("localhost:5000/buy");
                                 },
                                 error: function () {
-                                        redirectLogin();
+                                        redirectIndex();
                                 },
 
                         });
@@ -25,7 +26,9 @@
                         alert("this item is solt out !");
                 }
         }
-
+        function redirectIndex() {
+                window.location.href = "http://127.0.0.1:5000/index";
+        }
         function redirect() {
                 window.location.href = "http://127.0.0.1:5000/buyPage";
         }
