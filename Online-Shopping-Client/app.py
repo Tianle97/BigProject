@@ -227,7 +227,7 @@ def getProduct():
         return render_template("buy.html", username = session['username'], item = Parsed_json)
 
 # post order infomation values
-@app.route('/getProduct',methods = ['POST']) 
+@app.route('/buyProduct',methods = ['POST']) 
 def info_get():
     global bought
     username = session['username']
@@ -280,6 +280,22 @@ def goOrderPage():
     r = requests.get(url)
     Parsed_json = json.loads(r.text)
     return render_template("orderCreate.html", username = session['username'], items = Parsed_json)
+
+def delete(id):
+    url = 'http://127.0.0.1:8080/deleteOrderInfo?id='+id
+    r = requests.post(url)
+    print('888888',r.text)
+    return json.loads(r.text)
+
+@app.route('/deleteOrderInfo',methods = ['POST']) 
+def deleteOrderInfo():
+    global orderId
+    orderId = request.args.get('id')
+    print("order id: ",orderId)
+    re = delete(orderId)
+    if (re == 'delete succssful'):
+        print("@@")
+        return redirect('orderCreate')
 
 @app.route('/logout')
 def logout():
