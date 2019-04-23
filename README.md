@@ -18,4 +18,5 @@ This final year Project is Online-Shopping Web Application. It with the objectiv
 ## How to Run this Project
 + Git Clone this Repository in cmder or some terminal : https://github.com/Tianle97/BigProject 
 + Download [Wampserver64](http://www.wampserver.com/en/download-wampserver-64bits/), and then open it.
++ Download [MongoDB](https://www.mongodb.com/download-center?jmp=nav), and open it.
 + Open the `Online-Shpopping` Folder from eclipse IDE and Run it use by *Spring Boot App*.
