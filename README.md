@@ -20,3 +20,20 @@ This final year Project is Online-Shopping Web Application. It with the objectiv
 + Download [Wampserver64](http://www.wampserver.com/en/download-wampserver-64bits/), and then open it.
 + Download [MongoDB](https://www.mongodb.com/download-center?jmp=nav), and open it.
 + Open the `Online-Shpopping` Folder from eclipse IDE and Run it use by *Spring Boot App*.
++ Open the `Online-Shopping-Client` Folder from [Visual Studio Code](https://code.visualstudio.com/download) and Run it.</br>
+in the terminal go this folder and then type : </br>
+ `py app.py`
++ Go to the brower input url:http://localhost:5000 
+
+## Architecture
+In the Front-end Client Server: Python, flask-framework, jinjia2, html, JavaScript. </br>
+In the Back-end Server: Springboot, MongoDB and MySQL.
+![image](https://github.com/Tianle97/BigProject/blob/master/Untitled%20Diagram.png)
+
+
+
+
+
+
+
+
