@@ -28,7 +28,8 @@ in the terminal go this folder and then type : </br>
 ## Architecture Diagram
 In the Front-end Client Server: Python, flask-framework, jinjia2, html, JavaScript. </br>
 In the Back-end Server: Springboot, MongoDB and MySQL.
-![image](https://github.com/Tianle97/test/blob/master/Untitled%20Diagram.png)
+![image](https://github.com/Tianle97/test/blob/master/Untitled%20Diagram.jpg)
+Pages Relationship: </br>
 ![image](https://github.com/Tianle97/test/blob/master/view.png)
 
 ## Thechnology Explain
