@@ -59,10 +59,19 @@ Flask is called "microframework" because it uses a simple core and adds other fe
 9. Google App Engine compatible
 10. Additional features can be added with Extensions
 
-[Jinjia2](http://jinja.pocoo.org/)
++ [Jinjia2](http://jinja.pocoo.org/)
 Jinja2 is one of the most used template engines for Python. It is inspired by Django's templating system but extends it with an expressive language that gives template authors a more powerful set of tools. On top of that it adds sandboxed execution and optional automatic escaping for applications where security is important.
 
 It is internally based on Unicode and runs on a wide range of Python versions from 2.4 to current versions including Python 3.
+
++ [Docker](https://www.docker.com/)
+Docker is an open source software project that automates the deployment of applications under software containers, providing an additional layer of software abstraction and an automated management mechanism for operating system layer virtualization on the Linux operating system.
+
+Docker uses resource separation mechanisms in the Linux kernel, such as cgroups, and Linux core namespaces to create separate containers. This can operate under a single Linux entity, avoiding the extra burden of booting a virtual machine [2]. The Linux kernel's support for namespaces completely isolates the application's view of the work environment, including the trip tree, network, user ID, and mount file system, while the core cgroup provides resource isolation, including CPU, memory, block I/O, and The internet. Since version 0.9, Dockers has used Abstract Virtual to provide an interface through libvirt's LXC and systemd-nspawn, starting with the libcontainer library as a way to start using the virtualization provided by the Linux kernel in its own way.
+
++ [aws cloud](https://zh.wikipedia.org/wiki/Docker)
+Amazon Web Services (English: Amazon Web Services, abbreviated AWS), a cloud computing platform created by Amazon, provides many remote web services. Both Amazon EC2 and Amazon S3 are architected on this platform. It was first publicly operated in July 2002, providing other websites and client-side services.</br>
+Whether you're running a photo sharing app with millions of mobile users or supporting the critical operations of your business, the cloud services platform gives you quick access to flexible, low-cost IT resources. With cloud computing, you don't have to invest heavily in hardware and spend a lot of time maintaining and managing the hardware.
 
 ## Video
 
@@ -73,6 +82,9 @@ It is internally based on Unicode and runs on a wide range of Python versions fr
 + https://spring.io/projects/spring-boot </br>
 + http://flask.pocoo.org/docs/1.0/ </br>
 + http://jinja.pocoo.org/ </br>
-+ https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin
++ https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin </br>
++ https://www.docker.com/ </br>
++ https://zh.wikipedia.org/wiki/Docker </br>
++ https://zh.wikipedia.org/wiki/Docker </br>
 
 
