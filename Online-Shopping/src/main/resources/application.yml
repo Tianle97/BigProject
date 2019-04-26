@@ -11,4 +11,4 @@ spring:
   
   data:
     mongodb:
-      uri: mongodb://localhost:27017/product
+      uri: mongodb://127.0.0.1:27017/product

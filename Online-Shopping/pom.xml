@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker.image.prefix>onlineShopping</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -118,7 +119,38 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
 			</plugin>
+			
+			<plugin>
+	            <groupId>com.spotify</groupId>
+	            <artifactId>docker-maven-plugin</artifactId>
+	            <version>1.0.0</version>
+	            <configuration>
+	            	<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+	                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+	                <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+	                <resources>
+	                    <resource>
+	                        <targetPath>/</targetPath>
+	                        <directory>${project.build.directory}</directory>
+	                        <include>${project.build.finalName}.jar</include>
+	                    </resource>
+	                </resources>
+	            </configuration>
+	        </plugin>
+        
+
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <configuration>
+	                <skipTests>true</skipTests>
+	            </configuration>
+	        </plugin>
+
 		</plugins>
 	</build>
 

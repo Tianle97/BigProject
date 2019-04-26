@@ -2,10 +2,7 @@ package ie.gmit.sw.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
 import javax.persistence.*;
-
-
 
 public class MongoProduct implements Serializable{
 

@@ -49,6 +49,8 @@ public class ProductController {
 			new_prod.setStocks(prod.getStocks() - amount);
 			productService.updateProduct(new_prod);
 		}
+		//prod = productService.findById(id);
+		System.out.println("stocks" + prod.getStocks());
 		return prod;
 	}
 
