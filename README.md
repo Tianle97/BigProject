@@ -9,6 +9,11 @@ This project is the 4th year big project. That is a online Shopping Web Applicat
 ## Overview
 This final year Project is Online-Shopping Web Application. It with the objective to develop a basic website where consumer is provided with a shopping cart application and to know about the technologies used to develop such as an application.
 
+## Video Demonstration
+
+[![Watch the video](https://image.shutterstock.com/image-vector/youtube-web-video-player-play-260nw-634948040.jpg)](https://youtu.be/Dty8FmV9IC4)
+
+
 ## Components
 + Springboot tools
 + MySQL
@@ -72,9 +77,6 @@ Docker uses resource separation mechanisms in the Linux kernel, such as cgroups,
 + [aws cloud](https://zh.wikipedia.org/wiki/Docker)
 Amazon Web Services (English: Amazon Web Services, abbreviated AWS), a cloud computing platform created by Amazon, provides many remote web services. Both Amazon EC2 and Amazon S3 are architected on this platform. It was first publicly operated in July 2002, providing other websites and client-side services.</br>
 Whether you're running a photo sharing app with millions of mobile users or supporting the critical operations of your business, the cloud services platform gives you quick access to flexible, low-cost IT resources. With cloud computing, you don't have to invest heavily in hardware and spend a lot of time maintaining and managing the hardware.
-
-## Video
-
 
 
 
