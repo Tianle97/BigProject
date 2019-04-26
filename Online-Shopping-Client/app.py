@@ -172,7 +172,9 @@ def addProduct():
     image_file = request.files['photo']
     # imgdata = base64.b64decode(image.split(",")[1])
     imgdata_b = str(base64.b64encode(image_file.read()))
+    # Because show the picture will have little bit of different with the imgdata_b so need delete some chatacters
     imgdata = 'data:image/png;base64,'+imgdata_b[2:-1]
+    print("photo base64 == ",imgdata)
     re = ServerAddProduct(name, price, t,imgdata,st)
     if not name:
         flash("please input name !")
@@ -223,7 +225,6 @@ def getProduct():
         print("buy",id)
         session['id'] = id
         print("username:  ",session['username'])
-        #print(Parsed_json)
         bought = Parsed_json
         return render_template("buy.html", username = session['username'], item = Parsed_json)
 
@@ -243,32 +244,27 @@ def info_get():
     # mongoProduct ID
     id = session['id']
     Parsed_json = buy(id, amounts)
+    print("Check stocks: ", int(Parsed_json['stocks']))
+    if (int(amounts) > int(Parsed_json['stocks'])):
+        flash("sorry not enough amounts!")
+        return render_template("buy.html", username = session['username'], item = bought)
     name = Parsed_json['name']
     price = Parsed_json['price']
     date = str(datetime.datetime.now())[:19]
-    print('----->',date)
-    print('----->',amounts)
-    print('----->',name)
     totalPrice = int(amounts) * int(price)
-    print('----->',totalPrice)
     photo = Parsed_json['photo']
     # call this method for post the order details to back-end storage in mongodb
-    re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
-    if (int(Parsed_json['stocks']) == 0):
-        return redirect('orderCreate')
-    elif (int(amounts) > int(Parsed_json['stocks'])):
-        print("error stocks: ", int(Parsed_json['stocks']))
-        flash("sorry not enough amounts!")
-        return render_template("buy.html", username = session['username'], item = bought)
-    elif (re == 'create order seccessful'):
-        return redirect('orderCreate')
+    if (int(amounts) <= int(Parsed_json['stocks'])):
+        re = ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo)
+        #if (int(Parsed_json['stocks']) == 0):
+            #return redirect('orderCreate')
+        if (re == 'create order seccessful'):
+            return redirect('orderCreate')
 
 def ServerOrderInfo(username,name,amounts,price,date,totalPrice,photo):
     data = {'username': username, 'name': name, 'amounts':amounts, 'price':price, 'date':date, 'totalPrice':totalPrice, 'photo':photo}
     url = 'http://127.0.0.1:8080/addOrderInfo'
     r = requests.post(url, json = data)
-    print("##########",username)
-    print("##########",r.text)
     Parsed_json = json.loads(r.text)
     return Parsed_json['msg']
  
@@ -308,6 +304,6 @@ def logout():
    return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    #app.run(host='0.0.0.0')
     app.debug = True
     app.run()
